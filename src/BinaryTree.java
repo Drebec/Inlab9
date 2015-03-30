@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -37,6 +38,43 @@ public class BinaryTree<E extends Comparable> {
                         currentNode = currentNode.getRight();
                     }
                 }
+            }
+        }
+    }
+
+    public String makeArray(Node n) {
+        String output = "";
+        if (n != null) {
+            output += makeArray(n.getLeft());
+            output += n.getValue() + "\\";
+            output += makeArray(n.getRight());
+        }
+        return output;
+    }
+
+    public boolean isBST() {
+        String[] values = makeArray(root).split("\\\\");
+        for (int i = 1; i < values.length; i++) {
+            //System.out.println("Comparing " + values[i - 1] + " to " + values[i]);
+            if(Integer.parseInt(values[i - 1]) > Integer.parseInt(values[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void modify(E find, E replace) {
+        modify(find, replace, root);
+    }
+
+    public void modify(E find, E replace, Node n) {
+        if (n != null) {
+            if (n.getValue().compareTo(find) > 0) {
+                modify(find, replace, n.getLeft());
+            } else if (n.getValue().compareTo(find) < 0) {
+                modify(find, replace, n.getRight());
+            } else {
+                n.setValue(replace);
             }
         }
     }

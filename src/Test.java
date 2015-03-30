@@ -37,7 +37,7 @@ public class Test {
         System.out.println(tree.isBST() + "\n");
         
         //Remove this if you build your trees in a different fashion than I suggest
-        tree.modify(82, 89);
+        tree.modify(17, 20);
         
         PrintTree.printTree(tree);
         System.out.println(tree.isBST() + "\n");
